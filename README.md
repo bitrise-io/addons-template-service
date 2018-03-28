@@ -1,1 +1,1 @@
-# addons-template-service
+# Bitrise Sample Addon Server

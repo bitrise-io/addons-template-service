@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: postgres:10.3-alpine
+    environment:
+      POSTGRES_PASSWORD: admin
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+    - 3001:3001
+    environment:
+      DATABASE_URL: "host=db port=5432 user=postgres dbname=postgres password=admin sslmode=disable"
+      PORT: 3001
+      BITRISE_SHARED_SECRET: supersecret
