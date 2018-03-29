@@ -68,6 +68,12 @@ Example authentication header key-value pair:
     }
     ```
 
+*At this point in the next build you can use the envs $MYADDON_HOST_URL and $MYADDON_AUTH_SECRET.*
+
+*For example:*
+
+*POST https://$MYADDON_HOST_URL/store-cache (Authentication: $MYADDON_AUTH_SECRET)*
+
 ### Error Response
 
 - Status: 403 Unauthorized
