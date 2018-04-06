@@ -147,3 +147,66 @@ Example authentication header key-value pair:
       "error": "error message..."
   }
   ```
+  
+# SSO login
+
+The addon service will generate credentials with the method below:
+```
+  timestamp := time.Now().Unix()
+	s := sha1.New()
+  s.Write([]byte(fmt.Sprintf("%s:%s:%d", appSlug, serverConfig.SSOSecret, timestamp)))
+	token := s.Sum(nil)
+
+	c.Response().Header().Add("bitrise-sso-timestamp", fmt.Sprintf("%d", timestamp))
+	c.Response().Header().Add("bitrise-sso-token", fmt.Sprintf("%x", token))
+	c.Response().Header().Add("bitrise-sso-x-action", fmt.Sprintf("%s", fmt.Sprintf("%s/login", serverConfig.Host)))
+```
+
+and will respond with header fields(`bitrise-sso-timestamp`, `bitrise-sso-token`, `bitrise-sso-x-action`) that include those data. This is a communication between core and addon service. After the core received the data in the header, it will send a post form to the addon itself as the following:
+
+```
+method: post
+action: bitrise-sso-x-action?build_slug=build_slug
+
+fields
+timestamp: bitrise-sso-timestamp
+token: bitrise-sso-token
+app_slug: the-appslug
+```
+
+---
+
+# Login
+
+> Login post-form handler.
+
+**Method**: POST
+
+**URL**: `/login`
+
+**PARAMS**:
+
+- `build_slug` (Not required to handle, it is sent by Bitrise core but it is up to the addon that it want to use for redirection or not.)
+
+**FORMVALUES**:
+
+- `timestamp`
+- `token`
+- `app_slug`
+
+### Success Response
+
+- Status: 200 Success
+
+### Error Response
+
+- Status: 403 Unauthorized
+
+- Status: 500 InternalServerError
+
+- Content:
+  ```
+  {
+      "error": "error message..."
+  }
+  ```
