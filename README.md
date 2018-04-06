@@ -176,8 +176,6 @@ app_slug: the-appslug
 
 ---
 
-# Login
-
 > Login post-form handler.
 
 **Method**: POST
