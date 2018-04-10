@@ -44,7 +44,8 @@ Example authentication header key-value pair:
 ```
 {
     "plan": "free",
-    "app_slug": "app-slug-123"
+    "app_slug": "app-slug-123",
+    "api_token": "public-API-token"
 }
 ```
 
