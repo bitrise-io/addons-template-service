@@ -13,7 +13,9 @@ cp addon.db.example addon.db
 
 ### Build and run
 
+```
 go run *.go
+```
 
 # Details
 
