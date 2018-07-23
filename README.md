@@ -4,17 +4,16 @@
 
 ### Setup your environment
 
-Create an `.env` file and set a shared token, which will be used to authenticate your project with the Bitrise Servers. Also set a port for your template server.
+Create your `.env` and `addon.db` file by copying them from the example files
 
 ```
-PORT = 3000
-SHARED_TOKEN = my-secure-token
+cp .env.example .env
+cp addon.db.example addon.db
 ```
 
 ### Build and run
 
-go build
-
+go run *.go
 
 # Details
 
