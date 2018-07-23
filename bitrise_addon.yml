@@ -1,0 +1,15 @@
+id: "addons-template-service"
+details:
+  title: "Template Service"
+  summary: "An awesome template service"
+  description: "An awesome template service"
+subscription:
+  unit: "minutes"
+  plans:
+    free: 30
+    paid: 60
+
+access:
+  host: "http://localhost:3000",
+  token: "bitrise-shared-token",
+  sso_secret: "bitrise-shared-sso-secret"
