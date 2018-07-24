@@ -34,6 +34,12 @@ func main() {
 	// DELETE /provision/{app_slug}
 	provision.HandleFunc("/{app_slug}", deleteProvision).Methods(http.MethodDelete)
 
+	// SSO login
+	sso := r.PathPrefix("/sso").Subrouter()
+	sso.Use(authenticateWithSSO)
+
+	sso.HandleFunc("/auth", ssoLogin).Methods(http.MethodPost)
+
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
 	log.Printf("Server started at port %v", port)
