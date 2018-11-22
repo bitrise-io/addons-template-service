@@ -2,26 +2,7 @@
 
 The only requirement to have a custom Bitrise addon server is that the server must handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE`. It is required to be able to authenticate a Bitrise app on the server. Also this is how you can export environment variables into the build. (For example the url of this server, and an access token for the app). You can have as many addon server logic as you need, however this provision endpoint must use different authentication than the others, it must be the shared token that you will give to Bitrise to add your addon to the addon service.
 
-We will need these infos when you want to add a new addon:
-```
-id: "addons-firebase-testlab-android"
-details:
-  title: "Firebase TestLab"
-  summary: "Run your Android tests on Firebase TestLab"
-  description: "Run your Android tests on Firebase TestLab"
-subscription:
-  unit: "minutes"
-  plans:
-    free: 30
-    paid: 60
-
-access:
-  host: "http://addons-firebase-testlab-android:5001",
-  token: "bitrise-shared-token",
-  sso_secret: "bitrise-shared-sso-secret"
-```
-
-Further endpoint descriptions will use the infos above.
+We will need these infos when you want to add a new addon: https://github.com/bitrise-team/bitrise-addon-service/blob/master/_template/sample-addon.yml
 
 # Authentication
 
@@ -59,7 +40,7 @@ Example authentication header key-value pair:
         "envs": [
             {
                 "key": "MYADDON_HOST_URL",
-                "value": "http://addons-firebase-testlab-android:5001"
+                "value": "https://my-addon.url"
             },
             {
                 "key": "MYADDON_AUTH_SECRET",
