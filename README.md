@@ -2,7 +2,7 @@
 
 The only requirement to have a custom Bitrise addon server is that the server must handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE`. It is required to be able to authenticate a Bitrise app on the server. Also this is how you can export environment variables into the build. (For example the url of this server, and an access token for the app). You can have as many addon server logic as you need, however this provision endpoint must use different authentication than the others, it must be the shared token that you will give to Bitrise to add your addon to the addon service.
 
-We will need these infos when you want to add a new addon: https://github.com/bitrise-team/bitrise-addon-service/blob/master/_template/sample-addon.yml
+We will need these infos when you want to add a new addon: https://github.com/bitrise-io/bitrise-addon-service/blob/master/_template/sample-addon.yml
 
 # Authentication
 
