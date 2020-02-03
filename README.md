@@ -1,6 +1,8 @@
-# addons-template-service
+# Bitrise sample add-on service
 
-The only requirement to have a custom Bitrise addon server is that the server must handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE`. It is required to be able to authenticate a Bitrise app on the server. Also this is how you can export environment variables into the build. (For example the url of this server, and an access token for the app). You can have as many addon server logic as you need, however this provision endpoint must use different authentication than the others, it must be the shared token that you will give to Bitrise to add your addon to the addon service.
+This project imitates the Bitrise add-on interface, you have to implement, when you're developing an add-on for Bitrise. You can run it locally and test your service in action.
+
+The only requirement to develop a 3rd party Bitrise add-on is that the server must implement the Bitrise add-on interface. This contains 4 endpoint you have to handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE` and a `/login` endpoint with `POST` method. The `/provision` endpoints create, update and destroy the connection between your add-on and Bitrise. At the provisioning process you can specify the variables, which you want Bitrise to send to VMs for a build (e.g. access token, so the VM can authenticate to the add-on or the URL of your add-on). You can have as many addon server logic as you need, however this provision endpoint must use different authentication than the others, it must be the shared token that you will give to Bitrise to add your addon to the addon service.
 
 We will need these infos when you want to add a new addon: https://github.com/bitrise-io/bitrise-addon-service/blob/master/_template/sample-addon.yml
 
