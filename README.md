@@ -140,7 +140,7 @@ Delete the app's provisioned state, so the calls are pointed to this service wil
   
 # SSO login
 
-The addon service will generate credentials with an implementation similar to the code snippet below:
+The add-on service will generate credentials with an implementation similar to the code snippet below:
 
 ```
 timestamp := time.Now().Unix()
