@@ -177,6 +177,7 @@ app_slug: the-appslug
 **PARAMS**:
 
 - `build_slug` (Not required to handle, it is sent by Bitrise core but it is up to the add-on that it want to use for redirection or not.)
+- `app_title` provided by Bitrise, so Beam can show the Bitrise app's name, where the add-on is provisioned
 
 **FORMVALUES**:
 
