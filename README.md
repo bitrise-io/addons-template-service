@@ -2,13 +2,13 @@
 
 This project imitates the Bitrise add-on interface, you have to implement, when you're developing an add-on for Bitrise. You can run it locally and test your service in action.
 
-The only requirement to develop a 3rd party Bitrise add-on is that the server must implement the Bitrise add-on interface. This contains 4 endpoint you have to handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE` and a `/login` endpoint with `POST` method. The `/provision` endpoints create, update and destroy the connection between your add-on and Bitrise. At the provisioning process you can specify the variables, which you want Bitrise to send to VMs for a build (e.g. access token, so the VM can authenticate to the add-on or the URL of your add-on). You can have as many addon server logic as you need, however this provision endpoint must use different authentication than the others, it must be the shared token that you will give to Bitrise to add your addon to the addon service.
+The only requirement to develop a 3rd party Bitrise add-on is that the server must implement the Bitrise add-on interface. This contains 4 endpoint you have to handle a `/provision` endpoint with the methods: `POST`, `PUT`, `DELETE` and a `/login` endpoint with `POST` method. The `/provision` endpoints create, update and destroy the connection between your add-on and Bitrise. At the provisioning process you can specify the variables, which you want Bitrise to send to VMs for a build (e.g. access token, so the VM can authenticate to the add-on or the URL of your add-on). You can have as many addon server logic as you need, however the provision endpoints must use different authentication than the others, it must be the shared token that you will give to Bitrise, so your add-on can be added to the add-on service.
 
 We will need these infos when you want to add a new addon: https://github.com/bitrise-io/bitrise-addon-service/blob/master/_template/sample-addon.yml
 
 # Authentication
 
-All 3 endpoint requires authentication. This must be the shared token from the shared configuration. The header key must be `Authentication` and the value can be the shared token itself. Beside of the 3 provision handler, all of your other endpoints must use different authentication.
+All 3 provisioning endpoints require authentication. This must be the shared token from the shared configuration. The header key must be `Authentication` and the value can be the shared token itself. Beside of the 3 provision handler, all of your other endpoints must use different authentication.
 
 Example authentication header key-value pair:
  - `"Authentication" : "bitrise-shared-token"`
@@ -17,7 +17,7 @@ Example authentication header key-value pair:
 
 # Provision of a new app
 
-> The server creates a new record or updates an existing one with the appslug, to store provision state of the app. Also store a unique token for the appslug that will be used for the requests that are from a Bitrise build and calls this server. Also store the received plan, so you can have a service that can use specified parameters/limits by the plan. Finally sends back the list of environment variables that will be exported in all of the builds on Bitrise for the app.
+> The server creates a new record or updates an existing one with the app slug, to store provision state of the app. Also store a unique token for the app slug that will be used for the requests that are from a Bitrise build and calls your add-on server. Also store the received plan, so you can have a service that can use specified parameters/limits by the plan. Finally send back the list of environment variables that will be exported in all of the builds on Bitrise for the app.
 
 **Method**: POST
 
@@ -28,7 +28,8 @@ Example authentication header key-value pair:
 {
     "plan": "free",
     "app_slug": "app-slug-123",
-    "api_token": "public-API-token"
+    "api_token": "public-API-token",
+    "app_title": "My awesome add-on"
 }
 ```
 
